@@ -2,18 +2,20 @@
   position: relative;
   width: 100%;
   padding: 2rem 1rem;
+  overflow: visible;
 }
 
 .carousel-content {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .carousel-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  padding: 0 2rem;
+  padding: 1.5rem 2rem;
+  margin: 0.5rem 0;
 }
 
 .carousel-item {
@@ -23,78 +25,80 @@
 .evento-card-carousel {
   background: white;
   border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.12);
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   transition: all 0.3s ease;
 }
 
 .evento-card-carousel:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 12px 32px rgba(0, 0, 0, 0.2);
 }
 
-.evento-card-carousel .evento-header {
+.evento-card-carousel .evento-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.evento-card-carousel .evento-content {
+  padding: 1.5rem;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
   gap: 1rem;
+  flex-grow: 1;
 }
 
-.evento-card-carousel .evento-header h3 {
+.evento-card-carousel h3 {
   color: #333;
-  margin: 0;
-  flex: 1;
+  margin: 0 0 0.8rem 0;
   font-size: 1.1rem;
-}
-
-.evento-card-carousel .categoria-badge {
-  display: inline-block;
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.evento-card-carousel .categoria-badge.limpieza {
-  background-color: #e8f5e9;
-  color: #2e7d32;
-}
-
-.evento-card-carousel .categoria-badge.reunion {
-  background-color: #e3f2fd;
-  color: #1565c0;
-}
-
-.evento-card-carousel .categoria-badge.taller {
-  background-color: #fce4ec;
-  color: #c2185b;
+  line-height: 1.3;
+  text-align: left;
+  padding-bottom: 0.8rem;
+  border-bottom: 3px solid #8B2E47;
 }
 
 .evento-card-carousel .evento-info {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
-  padding: 1rem 0;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  gap: 0.6rem;
 }
 
-.evento-card-carousel .info-item {
+.evento-card-carousel .info-row {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.8rem;
   color: #666;
   font-size: 0.9rem;
 }
 
-.evento-card-carousel .info-item .icon {
-  font-size: 1.2rem;
+.evento-card-carousel .info-icon {
+  width: 20px;
+  height: 20px;
+  color: #8B2E47;
+  stroke: #8B2E47;
+  flex-shrink: 0;
+}
+
+.evento-card-carousel .evento-fecha {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.evento-card-carousel .evento-fecha .icon {
+  width: 18px;
+  height: 18px;
+  color: #666;
+  stroke: #666;
+  flex-shrink: 0;
 }
 
 .evento-card-carousel .evento-descripcion {
@@ -103,6 +107,11 @@
   font-size: 0.9rem;
   line-height: 1.5;
   flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .evento-card-carousel .evento-btn {
@@ -114,11 +123,19 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-size: 0.9rem;
+  margin-top: auto;
 }
 
 .evento-card-carousel .evento-btn:hover {
   background: #a83a57;
   transform: scale(1.02);
+}
+
+.evento-card-carousel .evento-btn .btn-icon {
+  width: 18px;
+  height: 18px;
+  stroke: white;
 }
 
 /* Botones del carrusel */
@@ -142,11 +159,11 @@
 }
 
 .carousel-btn.prev {
-  left: 0;
+  left: -3rem;
 }
 
 .carousel-btn.next {
-  right: 0;
+  right: -3rem;
 }
 
 /* Dots */

@@ -7,32 +7,29 @@ const EventosPage = () => {
     {
       id: 1,
       titulo: 'Limpieza Comunitaria',
-      fecha: '2025-11-20',
-      hora: '09:00',
-      ubicacion: 'Parque Central',
-      descripcion: 'Jornada de limpieza y embellecimiento del parque',
-      categoria: 'limpieza',
-      asistentes: 24
+      cuerpo: 'Jornada de limpieza y embellecimiento del parque central. Aportamos a mantener nuestra comunidad limpia y ordenada.',
+      fecha: '2025-11-20T09:00:00',
+      lat: 21.032000,
+      lng: -89.746400,
+      imagen_url: ''
     },
     {
       id: 2,
       titulo: 'Reunión de Junta Directiva',
-      fecha: '2025-11-22',
-      hora: '18:00',
-      ubicacion: 'Casa Comunal',
-      descripcion: 'Discusión de asuntos importantes de la comunidad',
-      categoria: 'reunion',
-      asistentes: 12
+      cuerpo: 'Discusión de asuntos importantes de la comunidad. Se tratarán temas relevantes sobre el desarrollo y bienestar de la zona.',
+      fecha: '2025-11-22T18:00:00',
+      lat: 21.031800,
+      lng: -89.746100,
+      imagen_url: ''
     },
     {
       id: 3,
       titulo: 'Taller de Emprendimiento',
-      fecha: '2025-11-25',
-      hora: '10:00',
-      ubicacion: 'Centro Comunitario',
-      descripcion: 'Aprende a emprender tu propio negocio con expertos',
-      categoria: 'taller',
-      asistentes: 45
+      cuerpo: 'Aprende a emprender tu propio negocio con expertos en el área. Descubre estrategias para iniciar y desarrollar tu empresa.',
+      fecha: '2025-11-25T10:00:00',
+      lat: 21.032300,
+      lng: -89.745900,
+      imagen_url: ''
     }
   ]);
 

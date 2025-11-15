@@ -9,6 +9,7 @@ const ReportarPage = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     apellido: '',
+    telefono: '',
     tipo: 'Inundaciones',
     descripcion: '',
     latitud: ucuLocation[0],
@@ -47,6 +48,7 @@ const ReportarPage = () => {
       reporte: {
         '@Nombre': formData.nombre,
         '@Apellido': formData.apellido,
+        '@Telefono': formData.telefono,
         '@Tipo': formData.tipo,
         '@Descripcion': formData.descripcion,
         '@Latitud': formData.latitud,
@@ -58,6 +60,7 @@ const ReportarPage = () => {
     setFormData({
       nombre: '',
       apellido: '',
+      telefono: '',
       tipo: 'Inundaciones',
       descripcion: '',
       latitud: ucuLocation[0],
@@ -104,6 +107,19 @@ const ReportarPage = () => {
               </div>
 
               <div className="form-group">
+                <label htmlFor="telefono">Teléfono</label>
+                <input
+                  type="tel"
+                  id="telefono"
+                  name="telefono"
+                  value={formData.telefono}
+                  onChange={handleChange}
+                  placeholder="+52 999 123 4567"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
                 <label htmlFor="tipo">Tipo de Reporte</label>
                 <select
                   id="tipo"
@@ -145,7 +161,16 @@ const ReportarPage = () => {
 
           {/* Mapa */}
           <div className="reportar-map-section">
-            <h3>Selecciona la ubicación en el mapa</h3>
+            <div className="map-header">
+              <h3>Selecciona la ubicación en el mapa</h3>
+              <div className="help-tooltip">
+                <span className="help-icon">?</span>
+                <div className="tooltip-content">
+                  <p><strong>Doble click:</strong> Marca la ubicación exacta</p>
+                  <p><strong>Arrastra:</strong> Mueve el marcador a otra ubicación</p>
+                </div>
+              </div>
+            </div>
             <MapComponent
               center={[formData.latitud, formData.longitud]}
               zoom={ucuZoom}
@@ -154,7 +179,7 @@ const ReportarPage = () => {
               onMapClick={handleMapClick}
               onCoordinatesSaved={handleCoordinatesSaved}
             />
-            <p className="map-info">Haz clic en el mapa para actualizar la ubicación</p>
+            <p className="map-info">Usa doble click o arrastra para seleccionar la ubicación</p>
           </div>
         </div>
       </div>

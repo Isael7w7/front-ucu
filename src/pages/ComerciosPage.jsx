@@ -55,10 +55,10 @@ const ComerciosPage = () => {
 
   const getCategoryColor = (categoria) => {
     const colors = {
-      tienda: '#FF6B6B',
-      servicios: '#4ECDC4',
-      alimentacion: '#FFE66D',
-      produccion: '#95E1D3'
+      tienda: '#D4A574',
+      servicios: '#F5DEB3',
+      alimentacion: '#C89060',
+      produccion: '#E8C9A0'
     };
     return colors[categoria] || '#8B2E47';
   };

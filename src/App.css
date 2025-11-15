@@ -27,3 +27,45 @@ html, body, #root {
   width: 100%;
   scroll-margin-top: 70px;
 }
+
+.description-section {
+  background: linear-gradient(135deg, #8B2E47 0%, #6b2339 100%);
+  padding: 4rem 1rem;
+  width: 100%;
+}
+
+.description-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.description-section h2 {
+  color: #F5DEB3;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.8rem;
+  text-align: left;
+}
+
+.description-section p {
+  color: rgba(245, 222, 179, 0.9);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+  text-align: justify;
+}
+
+@media (max-width: 768px) {
+  .description-section {
+    padding: 2rem 1rem;
+  }
+
+  .description-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .description-section p {
+    font-size: 0.9rem;
+  }
+}

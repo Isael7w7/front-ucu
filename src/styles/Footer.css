@@ -23,6 +23,13 @@
   gap: 1rem;
 }
 
+.footer-section:first-child {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
 .footer-section h3 {
   margin: 0;
   color: #FFF;
@@ -42,7 +49,7 @@
 }
 
 .footer-logo {
-  height: 140px;
+  height: 70px;
   width: auto;
   object-fit: contain;
 }
@@ -54,7 +61,7 @@
 }
 
 .footer-title {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: bold;
   color: #FFF;
   margin: 0;
@@ -62,7 +69,7 @@
 }
 
 .footer-tagline {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: #D4A574;
   margin: 0;
   line-height: 1.1;
@@ -106,14 +113,45 @@
   border-radius: 50%;
   color: #F5DEB3;
   text-decoration: none;
-  font-size: 1.2rem;
   transition: all 0.3s ease;
+}
+
+.social-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: #F5DEB3;
 }
 
 .social-icon:hover {
   background: rgba(245, 222, 179, 0.4);
   color: #FFF;
   transform: scale(1.1);
+}
+
+.social-icon:hover svg {
+  stroke: #FFF;
+}
+
+/* Contacto */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  color: #F5DEB3;
+  stroke: #F5DEB3;
+  flex-shrink: 0;
 }
 
 /* Footer Bottom */
@@ -126,7 +164,33 @@
 }
 
 .footer-bottom p {
-  margin: 0;
+  margin: 0 0 1rem 0;
+}
+
+.footer-credit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: rgba(245, 222, 179, 0.6);
+  transition: all 0.3s ease;
+}
+
+.footer-credit:hover {
+  color: rgba(245, 222, 179, 0.9);
+}
+
+.kancode-logo {
+  height: 16px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.footer-credit:hover .kancode-logo {
+  opacity: 1;
 }
 
 /* Responsive */

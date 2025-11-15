@@ -1,3 +1,29 @@
+.eventos-description-section {
+  background: linear-gradient(135deg, #8B2E47 0%, #6b2339 100%);
+  padding: 4rem 1rem;
+}
+
+.eventos-description-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.eventos-description-section h2 {
+  color: #F5DEB3;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.8rem;
+  text-align: left;
+}
+
+.eventos-description-section p {
+  color: rgba(245, 222, 179, 0.9);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+  text-align: justify;
+}
+
 .eventos-page {
   min-height: 100vh;
   background: #f5f5f5;
@@ -16,17 +42,30 @@
   color: #333;
   margin-bottom: 0.5rem;
   font-size: 2rem;
-  text-align: center;
+  text-align: left;
 }
 
 .eventos-page .subtitle {
   color: #666;
   margin-bottom: 3rem;
-  text-align: center;
+  text-align: left;
   font-size: 1rem;
 }
 
 @media (max-width: 768px) {
+  .eventos-description-section {
+    padding: 2rem 1rem;
+  }
+
+  .eventos-description-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .eventos-description-section p {
+    font-size: 0.9rem;
+  }
+
   .eventos-page h1 {
     font-size: 1.5rem;
   }
