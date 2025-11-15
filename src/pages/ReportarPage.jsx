@@ -192,6 +192,7 @@ const ReportarPage = () => {
                   value={formData.tipo}
                   onChange={handleChange}
                 >
+                  <option value="" selected>Selecciona el Problema</option>
                   <option value="Foco Fundido">Foco Fundido</option>
                   <option value="Baches">Baches</option>
                   <option value="Inundaciones">Inundaciones</option>
@@ -233,7 +234,7 @@ const ReportarPage = () => {
               <div className="help-tooltip">
                 <span className="help-icon">?</span>
                 <div className="tooltip-content">
-                  <p><strong>Doble click:</strong> Marca la ubicación exacta</p>
+                  <p><strong>Un click:</strong> Marca la ubicación exacta</p>
                 </div>
               </div>
             </div>
@@ -244,7 +245,7 @@ const ReportarPage = () => {
               popupText="Ubicación del reporte"
               onCoordinatesSaved={handleCoordinatesSaved}
             />
-            <p className="map-info">Usa doble click para seleccionar la ubicación</p>
+            <p className="map-info">Presiona para seleccionar la ubicación</p>
           </div>
         </div>
       </div>
