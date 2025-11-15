@@ -74,6 +74,16 @@ const ComerciosCarousel = ({ items }) => {
     return colors[categoria?.toLowerCase()] || '#D4A574';
   };
 
+  const handleContacto = (comercio) => {
+    // Abre el enlace de contacto (Facebook) del comercio
+    if (comercio.enlaceContacto) {
+      window.open(comercio.enlaceContacto, '_blank');
+    } else {
+      // Si no tiene contacto, muestra mensaje
+      alert(`No hay información de contacto disponible para ${comercio.nombre}`);
+    }
+  };
+
   return (
     <div 
       className="comercios-carousel"
@@ -98,15 +108,27 @@ const ComerciosCarousel = ({ items }) => {
 
                 <p className="comercio-pill-descripcion">{comercio.descripcion}</p>
 
-                <button 
+                <a
+                  href={comercio.enlaceMapa || `https://www.google.com/maps/?q=${comercio.lat},${comercio.lng}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="comercio-maps-btn"
-                  onClick={() => window.open(`https://www.google.com/maps/?q=${comercio.lat},${comercio.lng}`, '_blank')}
                 >
                   <svg viewBox="0 0 24 24" width="20" height="20" stroke="white" fill="none" strokeWidth="2">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                     <circle cx="12" cy="10" r="3"/>
                   </svg>
                   Ver Ubicación
+                </a>
+
+                <button
+                  className="comercio-pill-btn"
+                  onClick={() => handleContacto(comercio)}
+                >
+                  <svg viewBox="0 0 24 24" width="20" height="20" stroke="white" fill="none" strokeWidth="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                  Contactar
                 </button>
               </div>
             </div>

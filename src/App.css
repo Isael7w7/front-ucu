@@ -42,7 +42,7 @@ html, body, #root {
 
 .description-section {
   background: linear-gradient(135deg, #8B2E47 0%, #6b2339 100%);
-  padding: 5rem 1rem;
+  padding: 2rem 1rem;
   width: 100%;
   position: relative;
   overflow: hidden;
