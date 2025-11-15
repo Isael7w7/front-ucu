@@ -1,20 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../styles/Carousel.css';
 
 const Carousel = ({ items }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerSlide = 3;
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const carouselRef = useRef(null);
+  
+  const itemsPerSlide = isMobile ? 1 : 3;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => 
+        (prevIndex + itemsPerSlide) % items.length
+      );
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [itemsPerSlide, items.length]);
 
   const nextSlide = () => {
+    setIsAnimating(true);
     setCurrentIndex((prevIndex) => 
       (prevIndex + itemsPerSlide) % items.length
     );
+    setTimeout(() => setIsAnimating(false), 600);
   };
 
   const prevSlide = () => {
+    setIsAnimating(true);
     setCurrentIndex((prevIndex) => 
       (prevIndex - itemsPerSlide + items.length) % items.length
     );
+    setTimeout(() => setIsAnimating(false), 600);
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    setTouchEnd(e.changedTouches[0].clientX);
+    handleSwipe();
+  };
+
+  const handleSwipe = () => {
+    if (touchStart - touchEnd > 50) {
+      // Swipe left - next slide
+      nextSlide();
+    }
+    if (touchEnd - touchStart > 50) {
+      // Swipe right - prev slide
+      prevSlide();
+    }
   };
 
   const getVisibleItems = () => {
@@ -37,11 +86,14 @@ const Carousel = ({ items }) => {
   };
 
   return (
-    <div className="carousel">
-      <button className="carousel-btn prev" onClick={prevSlide}>❮</button>
-      
+    <div 
+      className="carousel"
+      ref={carouselRef}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className="carousel-content">
-        <div className="carousel-grid">
+        <div className={`carousel-grid ${isAnimating ? 'animate-slide' : ''}`}>
           {getVisibleItems().map((item, index) => (
             <div key={index} className="carousel-item">
               <div className="evento-card-carousel">
@@ -85,8 +137,6 @@ const Carousel = ({ items }) => {
           ))}
         </div>
       </div>
-
-      <button className="carousel-btn next" onClick={nextSlide}>❯</button>
 
       <div className="carousel-dots">
         {Array.from({ length: Math.ceil(items.length / itemsPerSlide) }).map((_, index) => (

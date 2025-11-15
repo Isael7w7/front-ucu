@@ -1,21 +1,50 @@
 .carousel {
   position: relative;
   width: 100%;
-  padding: 2rem 1rem;
+  padding: 0 1rem 4rem 1rem;
   overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .carousel-content {
   position: relative;
   overflow: visible;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
 }
 
 .carousel-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  padding: 1.5rem 2rem;
-  margin: 0.5rem 0;
+  padding: 0 2rem;
+  margin: 0;
+  position: relative;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.carousel-grid.animate-slide {
+  animation: slideSwipe 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+@keyframes slideSwipe {
+  0% {
+    opacity: 0.7;
+    transform: translateX(30px);
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .carousel-item {
@@ -31,6 +60,18 @@
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
+  animation: fadeInCard 0.6s ease-out;
+}
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .evento-card-carousel:hover {
@@ -138,40 +179,17 @@
   stroke: white;
 }
 
-/* Botones del carrusel */
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(139, 46, 71, 0.8);
-  color: white;
-  border: none;
-  padding: 1rem;
-  font-size: 1.5rem;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-  z-index: 20;
-}
-
-.carousel-btn:hover {
-  background: rgba(139, 46, 71, 1);
-}
-
-.carousel-btn.prev {
-  left: -3rem;
-}
-
-.carousel-btn.next {
-  right: -3rem;
-}
-
 /* Dots */
 .carousel-dots {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 2rem;
+  margin-top: 0rem;
+  width: 100%;
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  right: 0;
 }
 
 .dot {
@@ -182,12 +200,38 @@
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
+  animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.dot:hover {
+  transform: scale(1.2);
 }
 
 .dot.active {
   background: #8B2E47;
   width: 30px;
   border-radius: 6px;
+  animation: expandDot 0.3s ease-out;
+}
+
+@keyframes expandDot {
+  from {
+    width: 12px;
+  }
+  to {
+    width: 30px;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -195,23 +239,91 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
-
-  .carousel-btn {
-    padding: 0.8rem;
-    font-size: 1.2rem;
-  }
 }
 
 @media (max-width: 768px) {
+  .carousel {
+    padding: 1rem 0.5rem 5rem 0.5rem;
+    gap: 0;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .carousel-content {
+    width: 100%;
+    position: relative;
+    order: 2;
+  }
+
   .carousel-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
+    margin: 0;
   }
 
-  .carousel-btn {
-    padding: 0.6rem;
-    font-size: 1rem;
+  .carousel-dots {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-top: 1rem;
+    order: unset;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel {
+    padding: 0.8rem 0 5rem 0;
+    gap: 0;
+    flex-direction: column;
+  }
+
+  .carousel-content {
+    width: 100%;
+  }
+
+  .carousel-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .evento-card-carousel .evento-content {
+    padding: 1rem;
+    gap: 0.8rem;
+  }
+
+  .evento-card-carousel h3 {
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .evento-card-carousel .info-row {
+    font-size: 0.8rem;
+    gap: 0.6rem;
+  }
+
+  .evento-card-carousel .info-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .evento-card-carousel .evento-descripcion {
+    font-size: 0.85rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  .evento-card-carousel .evento-btn {
+    padding: 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .carousel-dots {
+    margin-top: 1rem;
   }
 }
 

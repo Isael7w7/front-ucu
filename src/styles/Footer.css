@@ -3,6 +3,18 @@
   color: #F5DEB3;
   padding: 3rem 1rem 1rem;
   margin-top: 5rem;
+  animation: slideUpFooter 0.7s ease-out;
+}
+
+@keyframes slideUpFooter {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .footer-container {
@@ -21,6 +33,18 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .footer-section:first-child {
@@ -52,6 +76,18 @@
   height: 70px;
   width: auto;
   object-fit: contain;
+  animation: bounceIn 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes bounceIn {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .footer-info {
@@ -90,11 +126,26 @@
   text-decoration: none;
   font-size: 0.9rem;
   transition: all 0.3s ease;
+  position: relative;
+}
+
+.footer-section ul li a::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #F5DEB3;
+  transition: width 0.3s ease;
+}
+
+.footer-section ul li a:hover::before {
+  width: 100%;
 }
 
 .footer-section ul li a:hover {
   color: #FFF;
-  text-decoration: underline;
 }
 
 /* Redes Sociales */
@@ -114,6 +165,18 @@
   color: #F5DEB3;
   text-decoration: none;
   transition: all 0.3s ease;
+  animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .social-icon svg {
@@ -125,7 +188,7 @@
 .social-icon:hover {
   background: rgba(245, 222, 179, 0.4);
   color: #FFF;
-  transform: scale(1.1);
+  transform: scale(1.15) rotate(5deg);
 }
 
 .social-icon:hover svg {
@@ -144,6 +207,12 @@
   align-items: center;
   gap: 0.8rem;
   font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+  transform: translateX(5px);
+  color: #FFF;
 }
 
 .contact-icon {
@@ -152,6 +221,12 @@
   color: #F5DEB3;
   stroke: #F5DEB3;
   flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover .contact-icon {
+  color: #FFF;
+  stroke: #FFF;
 }
 
 /* Footer Bottom */
@@ -161,6 +236,16 @@
   text-align: center;
   color: #D4A574;
   font-size: 0.85rem;
+  animation: fadeIn 0.8s ease-out 0.4s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .footer-bottom p {

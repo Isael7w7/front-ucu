@@ -6,7 +6,7 @@ const Navbar = ({
   onEventos, 
   onComercios,
   logoText = 'XuxCu',
-  logoYear = 'Cuidadana, Empleos y Comercio',
+  logoYear = 'Cuidadana, Eventos y Comercio',
   logoSrc = '/Logo XuxCu.svg'
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,7 +23,7 @@ const Navbar = ({
   const menuItems = [
     { label: 'Eventos', onClick: onEventos },
     { label: 'Comercios', onClick: onComercios },
-    { label: 'Reportar', onClick: onReportar },
+    { label: 'Reportes', onClick: onReportar },
    
   ];
 

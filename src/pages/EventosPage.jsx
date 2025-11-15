@@ -11,7 +11,7 @@ const EventosPage = () => {
       fecha: '2025-11-20T09:00:00',
       lat: 21.032000,
       lng: -89.746400,
-      imagen_url: ''
+      imagen_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjX1I7yVUmYZ_FoCXjszlxbu3hT9SrEqrkdg&s'
     },
     {
       id: 2,
@@ -20,7 +20,7 @@ const EventosPage = () => {
       fecha: '2025-11-22T18:00:00',
       lat: 21.031800,
       lng: -89.746100,
-      imagen_url: ''
+      imagen_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjX1I7yVUmYZ_FoCXjszlxbu3hT9SrEqrkdg&s'
     },
     {
       id: 3,
@@ -29,7 +29,7 @@ const EventosPage = () => {
       fecha: '2025-11-25T10:00:00',
       lat: 21.032300,
       lng: -89.745900,
-      imagen_url: ''
+      imagen_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjX1I7yVUmYZ_FoCXjszlxbu3hT9SrEqrkdg&s'
     }
   ]);
 
