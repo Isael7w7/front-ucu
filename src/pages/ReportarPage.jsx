@@ -7,12 +7,12 @@ const ReportarPage = () => {
   const ucuZoom = 15;
 
   const [formData, setFormData] = useState({
-    titulo: '',
+    nombre: '',
+    apellido: '',
+    tipo: 'Inundaciones',
     descripcion: '',
-    categoria: 'infraestructura',
-    ubicacion: '',
-    imagen: null,
-    coordenadas: ucuLocation
+    latitud: ucuLocation[0],
+    longitud: ucuLocation[1]
   });
 
   const handleChange = (e) => {
@@ -23,24 +23,35 @@ const ReportarPage = () => {
     }));
   };
 
-  const handleImageChange = (e) => {
+  const handleMapClick = (lat, lng) => {
     setFormData(prev => ({
       ...prev,
-      imagen: e.target.files[0]
+      latitud: lat,
+      longitud: lng
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Reporte enviado:', formData);
+    const reporteData = {
+      reporte: {
+        '@Nombre': formData.nombre,
+        '@Apellido': formData.apellido,
+        '@Tipo': formData.tipo,
+        '@Descripcion': formData.descripcion,
+        '@Latitud': formData.latitud,
+        '@Longitud': formData.longitud
+      }
+    };
+    console.log('Reporte enviado:', JSON.stringify(reporteData, null, 2));
     alert('¡Reporte enviado exitosamente!');
     setFormData({
-      titulo: '',
+      nombre: '',
+      apellido: '',
+      tipo: 'Inundaciones',
       descripcion: '',
-      categoria: 'infraestructura',
-      ubicacion: '',
-      imagen: null,
-      coordenadas: ucuLocation
+      latitud: ucuLocation[0],
+      longitud: ucuLocation[1]
     });
   };
 
@@ -54,32 +65,46 @@ const ReportarPage = () => {
           {/* Formulario */}
           <div className="reportar-form-section">
             <form onSubmit={handleSubmit} className="reportar-form">
-              <div className="form-group">
-                <label htmlFor="titulo">Título del Reporte</label>
-                <input
-                  type="text"
-                  id="titulo"
-                  name="titulo"
-                  value={formData.titulo}
-                  onChange={handleChange}
-                  placeholder="Ej: Bache en la calle Principal"
-                  required
-                />
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="nombre">Nombre</label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    value={formData.nombre}
+                    onChange={handleChange}
+                    placeholder="Tu nombre"
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="apellido">Apellido</label>
+                  <input
+                    type="text"
+                    id="apellido"
+                    name="apellido"
+                    value={formData.apellido}
+                    onChange={handleChange}
+                    placeholder="Tu apellido"
+                    required
+                  />
+                </div>
               </div>
 
               <div className="form-group">
-                <label htmlFor="categoria">Categoría</label>
+                <label htmlFor="tipo">Tipo de Reporte</label>
                 <select
-                  id="categoria"
-                  name="categoria"
-                  value={formData.categoria}
+                  id="tipo"
+                  name="tipo"
+                  value={formData.tipo}
                   onChange={handleChange}
                 >
-                  <option value="infraestructura">Infraestructura</option>
-                  <option value="seguridad">Seguridad</option>
-                  <option value="servicios">Servicios</option>
-                  <option value="limpieza">Limpieza</option>
-                  <option value="otros">Otros</option>
+                  <option value="Inundaciones">Inundaciones</option>
+                  <option value="Baches">Baches</option>
+                  <option value="Luminarias Dañadas">Luminarias Dañadas</option>
+                  <option value="Fugas">Fugas</option>
                 </select>
               </div>
 
@@ -97,25 +122,11 @@ const ReportarPage = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="ubicacion">Ubicación (Texto)</label>
-                <input
-                  type="text"
-                  id="ubicacion"
-                  name="ubicacion"
-                  value={formData.ubicacion}
-                  onChange={handleChange}
-                  placeholder="Ej: Calle Principal, esquina con Avenida Secundaria"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="imagen">Cargar Imagen (Opcional)</label>
-                <input
-                  type="file"
-                  id="imagen"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                />
+                <label>Coordenadas</label>
+                <div className="coordenadas-display">
+                  <p><strong>Latitud:</strong> {formData.latitud.toFixed(6)}</p>
+                  <p><strong>Longitud:</strong> {formData.longitud.toFixed(6)}</p>
+                </div>
               </div>
 
               <button type="submit" className="submit-btn">Enviar Reporte</button>
@@ -126,10 +137,11 @@ const ReportarPage = () => {
           <div className="reportar-map-section">
             <h3>Selecciona la ubicación en el mapa</h3>
             <MapComponent
-              center={formData.coordenadas}
+              center={[formData.latitud, formData.longitud]}
               zoom={ucuZoom}
-              markerPosition={formData.coordenadas}
+              markerPosition={[formData.latitud, formData.longitud]}
               popupText="Ubicación del reporte"
+              onMapClick={handleMapClick}
             />
             <p className="map-info">Haz clic en el mapa para actualizar la ubicación</p>
           </div>

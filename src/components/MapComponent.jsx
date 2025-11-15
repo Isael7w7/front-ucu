@@ -1,6 +1,6 @@
 // src/components/MapComponent.jsx
-import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import React, { useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 // Importa el ícono predeterminado de Leaflet para que los marcadores se muestren correctamente
 import 'leaflet/dist/images/marker-icon-2x.png';
 import 'leaflet/dist/images/marker-icon.png';
@@ -16,10 +16,21 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
 });
 
+// Componente para manejar eventos del mapa
+const MapEvents = ({ onMapClick }) => {
+  const map = useMapEvents({
+    click: (e) => {
+      if (onMapClick) {
+        onMapClick(e.latlng.lat, e.latlng.lng);
+      }
+    }
+  });
+  return null;
+};
 
-const MapComponent = ({ center, zoom, markerPosition, popupText }) => {
+const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick }) => {
   // Valor por defecto para el centro del mapa si no se provee
-  const defaultCenter = [21.031940305999093, -89.74636956802323]; // Londres
+  const defaultCenter = [21.031940305999093, -89.74636956802323]; // Ucú, Yucatán
   const defaultZoom = 13;
 
   const ucuBounds = [
@@ -44,6 +55,9 @@ const MapComponent = ({ center, zoom, markerPosition, popupText }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+
+      {/* Componente para capturar eventos del mapa */}
+      <MapEvents onMapClick={onMapClick} />
 
       {/* Si se proporciona una posición de marcador, se añade un Marker al mapa */}
       {markerPosition && (

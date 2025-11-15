@@ -55,6 +55,16 @@
   gap: 0.5rem;
 }
 
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  margin: 0;
+}
+
 .form-group label {
   font-weight: 600;
   color: #333;
@@ -83,6 +93,22 @@
 .form-group textarea {
   resize: vertical;
   min-height: 120px;
+}
+
+.coordenadas-display {
+  background: #f9f9f9;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.coordenadas-display p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
 }
 
 .submit-btn {
