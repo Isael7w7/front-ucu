@@ -6,7 +6,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 // Importa estilos globales (archivo de estilos en src/styles)
 // import './styles/main.css'; 
-
+// Importa los estilos base de Leaflet
+import 'leaflet/dist/leaflet.css';
 // Encuentra el elemento DOM donde se montará la aplicación (generalmente el div con id="root")
 const rootElement = document.getElementById('root');
 
