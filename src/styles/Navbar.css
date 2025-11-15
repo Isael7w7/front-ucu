@@ -13,6 +13,7 @@
     transform: translateY(-100%);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -54,6 +55,7 @@
     opacity: 0;
     transform: scale(0.3);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -92,6 +94,7 @@
     opacity: 0;
     transform: translateX(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -169,6 +172,7 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -228,10 +232,77 @@
     opacity: 0;
     transform: scale(0);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+/* Estilos para el botón "Inicio de sesión" - tonos cercanos a la paleta del navbar */
+:root {
+  --nav-primary: #0b7a75;
+  /* tono principal (verde/teal) */
+  --nav-accent: #00b894;
+  /* acento más brillante */
+  --nav-contrast: #ffffff;
+  /* texto claro sobre el botón */
+}
+
+.login-button {
+  background: linear-gradient(90deg, var(--nav-primary), var(--nav-accent));
+  color: var(--nav-contrast);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(7, 90, 86, 0.18);
+  transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+/* Hover / focus / active */
+.login-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(7, 90, 86, 0.22);
+  opacity: 0.98;
+}
+
+.login-button:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(7, 90, 86, 0.16);
+}
+
+.login-button:focus {
+  outline: 3px solid rgba(0, 184, 148, 0.18);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* Ajustes responsivos: en pantallas pequeñas el botón se hace más compacto
+   y si quieres que aparezca dentro del menú desplegable activa la clase .navbar-menu.active */
+@media (max-width: 768px) {
+  .login-button {
+    padding: 6px 10px;
+    font-size: 0.92rem;
+  }
+
+  /* Si prefieres mostrar el botón dentro del menú desplegable cuando está abierto,
+     descomenta la regla siguiente y mueve o duplica el botón según diseño. */
+  /*
+  .navbar-actions .login-button { display: none; }
+  .navbar-menu.active .login-button {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  */
 }
 
 /* Responsive */
@@ -301,4 +372,3 @@
     font-size: 0.7rem;
   }
 }
-

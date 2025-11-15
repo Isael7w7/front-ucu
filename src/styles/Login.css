@@ -1,0 +1,158 @@
+/* Estilos para login centrado con fondo blanco y tarjeta de buen tamaño */
+:root {
+  --primary: #0b7a75;
+  --accent: #00b894;
+  --text: #222;
+  --muted: #666;
+  --card-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+}
+
+
+
+/* Tarjeta central */
+.login-card-minimal {
+  width: 480px;
+  max-width: 94%;
+  background-color: #ffffff;
+  padding: 36px;
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+  text-align: left;
+  color: var(--text);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Encabezados */
+.login-title {
+  font-size: 22px;
+  margin: 0 0 6px 0;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.login-sub {
+  margin: 0 0 18px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Formulario */
+.login-form-minimal {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  color: #333;
+}
+
+/* Inputs */
+.input-minimal {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+  background: #fafafa;
+  font-size: 15px;
+  color: #111;
+  outline: none;
+  transition: box-shadow 120ms ease, border-color 120ms ease, transform 120ms ease;
+}
+
+.input-minimal::placeholder {
+  color: #bdbdbd;
+}
+
+.input-minimal:focus {
+  border-color: rgba(11, 122, 117, 0.18);
+  box-shadow: 0 8px 20px rgba(11, 122, 117, 0.06);
+  transform: translateY(-1px);
+}
+
+/* Mensaje de error */
+.login-error-message {
+  color: #b00020;
+  background: #fff0f0;
+  border: 1px solid rgba(176, 0, 32, 0.12);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 0;
+}
+
+/* Acciones: botones */
+.actions-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Botón volver (estilo discreto) */
+.back-btn-login {
+  flex: 1;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: transparent;
+  color: var(--muted);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Botón de envío (más destacado) */
+.submit-btn-login {
+  flex: 1;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  box-shadow: 0 10px 28px rgba(7, 90, 86, 0.12);
+  transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+}
+
+.back-btn-login:disabled,
+.submit-btn-login:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submit-btn-login:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(7, 90, 86, 0.16);
+}
+
+.back-btn-login:hover {
+  transform: translateY(-1px);
+}
+
+/* En pantallas pequeñas apilar botones */
+@media (max-width: 420px) {
+  .login-card-minimal {
+    padding: 20px;
+    border-radius: 10px;
+    width: 92%;
+  }
+
+  .actions-row {
+    flex-direction: column-reverse;
+  }
+
+  .back-btn-login,
+  .submit-btn-login {
+    width: 100%;
+    flex: unset;
+  }
+}

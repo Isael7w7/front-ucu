@@ -1,0 +1,40 @@
+/* src/styles/MainLayout.css */
+
+/* 1. Contenedor principal: define el patrón flexbox */
+.app-container {
+  /* Ocupa el 100% de la altura de la vista (viewport) */
+  min-height: 100vh;
+  /* Habilitar flexbox */
+  display: flex;
+  /* Apilar elementos verticalmente (Navbar, main, Footer) */
+  flex-direction: column;
+}
+
+/* 2. Contenido principal: absorbe el espacio extra */
+.main-content {
+  /* Esto es lo CLAVE: hace que el <main> ocupe todo el espacio 
+       vertical sobrante, empujando el Footer hacia abajo. */
+  flex-grow: 1;
+
+  /* Configuración adicional para centrar elementos (como el formulario de Login) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centrado horizontal del contenido de la página */
+  justify-content: center;
+  /* Centrado vertical del contenido (útil para Login) */
+  width: 100%;
+  box-sizing: border-box;
+  /* Asegura que el padding no afecte el ancho */
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* 3. Estilos básicos para asegurar que el HTML/body no interfiera */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
