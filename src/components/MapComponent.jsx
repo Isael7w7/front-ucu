@@ -35,11 +35,12 @@ const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick, onC
   
   // Valor por defecto para el centro del mapa si no se provee
   const defaultCenter = [21.031940305999093, -89.74636956802323]; // Ucú, Yucatán
-  const defaultZoom = 13;
+  const defaultZoom = 15;
 
+  // Límites más precisos del perímetro de Ucú
   const ucuBounds = [
-    [21.0200, -89.7600], // Suroeste
-    [21.0450, -89.7300]  // Noreste
+    [21.0250, -89.7550], // Suroeste
+    [21.0400, -89.7350]  // Noreste
   ];
 
   // Al hacer click, colocamos el marcador y guardamos coordenadas
@@ -53,22 +54,22 @@ const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick, onC
   // Crear un DivIcon SVG color "guinda" (burgundy) para el marcador
   const guindaColor = '#7a2230';
   const guindaSvg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
-      <path d="M15 0C7 0 0 7 0 15c0 10 15 27 15 27s15-17 15-27C30 7 23 0 15 0z" fill="${guindaColor}"/>
-      <circle cx="15" cy="15" r="5" fill="#fff"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32">
+      <path d="M12 0C5.6 0 0 5.6 0 12c0 8 12 20 12 20s12-12 12-20C24 5.6 18.4 0 12 0z" fill="${guindaColor}"/>
+      <circle cx="12" cy="12" r="4" fill="#fff"/>
     </svg>
   `;
 
   const guindaIcon = L.divIcon({
     html: guindaSvg,
     className: '',
-    iconSize: [30, 42],
-    iconAnchor: [15, 42],
-    popupAnchor: [0, -36]
+    iconSize: [24, 32],
+    iconAnchor: [12, 32],
+    popupAnchor: [0, -28]
   });
 
   // Cursor usando el mismo SVG (encodeado) para que coincida con el icono
-  const guindaCursor = `url("data:image/svg+xml;utf8,${encodeURIComponent(guindaSvg)}") 15 42, auto`;
+  const guindaCursor = `url("data:image/svg+xml;utf8,${encodeURIComponent(guindaSvg)}") 12 32, auto`;
 
   return (
     // MapContainer es el contenedor principal del mapa de react-leaflet
@@ -77,13 +78,15 @@ const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick, onC
       center={center || defaultCenter}
       zoom={zoom || defaultZoom}
       minZoom={15}
+      maxZoom={18}
       scrollWheelZoom={true}
       doubleClickZoom={false}
       style={{
-        height: '500px',
+        height: '280px',
         width: '100%',
+        maxWidth: '500px',
+        margin: '0 auto',
         borderRadius: '8px',
-        // Cursor que usa el mismo SVG guinda del marcador
         cursor: guindaCursor
       }}
       maxBounds={ucuBounds}

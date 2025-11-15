@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ComerciosCarousel from '../components/ComerciosCarousel';
+import ComerciosMapView from '../components/ComerciosMapView';
+import LoginComercio from '../components/LoginComercio';
+import PublicarComercio from '../components/PublicarComercio';
 import '../styles/Comercios.css';
 
 const ComerciosPage = () => {
@@ -7,6 +10,16 @@ const ComerciosPage = () => {
   const [comercios, setComercios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showPublicarModal, setShowPublicarModal] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' o 'map'
+
+  // Verificar autenticación
+  useEffect(() => {
+    const auth = localStorage.getItem('comercioAuth');
+    setIsAuthenticated(!!auth);
+  }, []);
 
   // Fetch comercios del backend
   useEffect(() => {
@@ -99,6 +112,20 @@ const ComerciosPage = () => {
     }
   };
 
+  const handlePublicarClick = () => {
+    if (isAuthenticated) {
+      setShowPublicarModal(true);
+    } else {
+      setShowLoginModal(true);
+    }
+  };
+
+  const handleLoginSuccess = () => {
+    setShowLoginModal(false);
+    setIsAuthenticated(true);
+    setShowPublicarModal(true);
+  };
+
   if (loading) {
     return (
       <div className="comercios-page">
@@ -139,11 +166,41 @@ const ComerciosPage = () => {
         <h1>Catálogo de Comercios</h1>
         <p className="subtitle">Descubre los negocios locales de tu comunidad</p>
 
-        {isMobile ? (
-          <ComerciosCarousel items={comercios} />
-        ) : (
-          <div className="comercios-grid">
-            {comercios.map(comercio => (
+        {/* Botones de cambio de vista */}
+        <div className="view-toggle-buttons">
+          <button
+            className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`}
+            onClick={() => setViewMode('grid')}
+            title="Vista de tarjetas"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span>Tarjetas</span>
+          </button>
+          <button
+            className={`view-btn ${viewMode === 'map' ? 'active' : ''}`}
+            onClick={() => setViewMode('map')}
+            title="Vista de mapa"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>Mapa</span>
+          </button>
+        </div>
+
+        {/* Vista según el modo seleccionado */}
+        {viewMode === 'grid' ? (
+          isMobile ? (
+            <ComerciosCarousel items={comercios} />
+          ) : (
+            <div className="comercios-grid">
+              {comercios.map(comercio => (
               <div key={comercio.id} className="comercio-pill">
                 <div className="comercio-pill-header">
                   <h3>{comercio.nombre}</h3>
@@ -180,8 +237,42 @@ const ComerciosPage = () => {
               </div>
             ))}
           </div>
+          )
+        ) : (
+          <ComerciosMapView comercios={comercios} />
         )}
+
+        {/* Banner CTA para comerciantes */}
+        <div className="comerciantes-cta-banner">
+          <div className="cta-content">
+            <div className="cta-text">
+              <h3>¿Tienes un comercio en Ucú?</h3>
+              <p>Únete a nuestra plataforma y dale mayor visibilidad a tu negocio. Regístrate gratis y empieza a atraer más clientes de tu comunidad.</p>
+            </div>
+            <button className="cta-button" onClick={handlePublicarClick}>
+              <svg className="cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
+              </svg>
+              <span>Publicar Mi Comercio</span>
+            </button>
+          </div>
+        </div>
       </div>
+
+      {/* Modales */}
+      {showLoginModal && (
+        <LoginComercio 
+          onClose={() => setShowLoginModal(false)}
+          onLoginSuccess={handleLoginSuccess}
+        />
+      )}
+
+      {showPublicarModal && (
+        <PublicarComercio 
+          onClose={() => setShowPublicarModal(false)}
+        />
+      )}
     </div>
   );
 };

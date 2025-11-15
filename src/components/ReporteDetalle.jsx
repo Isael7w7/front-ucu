@@ -1,6 +1,7 @@
 import "../styles/ReporteDetalle.css";
 import { useState } from "react";
 import html2pdf from "html2pdf.js";
+import MapComponent from './MapComponent';
 // /* eslint-disable react/prop-types */
 
 function ReporteDetalle({ reporte, onClose, onEstadoChange }) {
@@ -165,19 +166,27 @@ function ReporteDetalle({ reporte, onClose, onEstadoChange }) {
 
           <div className="reporte-ubicacion">
             <h3>Ubicación del Reporte</h3>
-            <div className="ubicacion-grid">
-              <div className="ubicacion-item">
-                <label>Latitud</label>
-                <p>{reporte.lat}</p>
-              </div>
-              <div className="ubicacion-item">
-                <label>Longitud</label>
-                <p>{reporte.lng}</p>
-              </div>
+            <div className="mapa-preview-container">
+              <MapComponent
+                center={[reporte.lat, reporte.lng]}
+                zoom={16}
+                markerPosition={[reporte.lat, reporte.lng]}
+                popupText={`Reporte #${reporte.id}`}
+                interactive={false}
+              />
             </div>
-            <div className="mapa-placeholder">
-              <p>📍 Ubicación: ({reporte.lat}, {reporte.lng})</p>
-            </div>
+            <a 
+              href={`https://www.google.com/maps?q=${reporte.lat},${reporte.lng}&z=16`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ver-google-maps"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Ver en Google Maps
+            </a>
           </div>
 
           <div className="reporte-descripcion">

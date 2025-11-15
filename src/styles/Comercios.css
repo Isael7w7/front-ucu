@@ -49,6 +49,53 @@
   animation: slideInUp 0.6s ease-out 0.1s both;
 }
 
+/* Botones de cambio de vista */
+.view-toggle-buttons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  animation: slideInUp 0.6s ease-out 0.2s both;
+}
+
+.view-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: white;
+  border: 2px solid #D4A574;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #8B2E47;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.view-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.view-btn:hover {
+  background: #F5DEB3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+}
+
+.view-btn.active {
+  background: linear-gradient(135deg, #8B2E47 0%, #6b2339 100%);
+  color: white;
+  border-color: #8B2E47;
+  box-shadow: 0 4px 16px rgba(139, 46, 71, 0.4);
+}
+
+.view-btn.active svg {
+  stroke: white;
+}
+
 .comercios-page .subtitle.error-message {
   color: #ff6b6b;
   font-weight: 600;
@@ -335,5 +382,165 @@
 
   .comercios-page h1 {
     font-size: 1.5rem;
+  }
+
+  .view-toggle-buttons {
+    gap: 0.5rem;
+  }
+
+  .view-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 0.625rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .view-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Banner CTA para comerciantes */
+.comerciantes-cta-banner {
+  margin-top: 4rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+  border-radius: 24px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  border: 3px solid #F5DEB3;
+  animation: slideInUp 0.6s ease-out 0.3s both;
+}
+
+.cta-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.cta-text {
+  flex: 1;
+}
+
+.cta-text h3 {
+  font-size: 2rem;
+  color: #8B2E47;
+  margin: 0 0 1rem 0;
+  font-weight: 800;
+}
+
+.cta-text p {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.cta-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 2.5rem;
+  background: linear-gradient(135deg, #8B2E47 0%, #6b2339 100%);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(139, 46, 71, 0.4);
+  white-space: nowrap;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.cta-button:hover::before {
+  left: 100%;
+}
+
+.cta-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(139, 46, 71, 0.5);
+  background: linear-gradient(135deg, #a83a57 0%, #8B2E47 100%);
+}
+
+.cta-button:active {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 46, 71, 0.4);
+}
+
+.cta-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Responsive del banner CTA */
+@media (max-width: 768px) {
+  .comerciantes-cta-banner {
+    margin-top: 3rem;
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+
+  .cta-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .cta-text h3 {
+    font-size: 1.5rem;
+  }
+
+  .cta-text p {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .comerciantes-cta-banner {
+    margin-top: 2rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .cta-text h3 {
+    font-size: 1.25rem;
+  }
+
+  .cta-text p {
+    font-size: 0.95rem;
+  }
+
+  .cta-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .cta-icon {
+    width: 20px;
+    height: 20px;
   }
 }

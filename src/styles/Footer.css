@@ -195,6 +195,128 @@
   stroke: #FFF;
 }
 
+/* Botón de WhatsApp Chatbot en Footer - DESTACADO */
+.footer-whatsapp-chatbot {
+  display: block;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  position: relative;
+  overflow: hidden;
+  animation: pulseGlowFooter 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlowFooter {
+  0%, 100% {
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7);
+  }
+}
+
+.footer-whatsapp-chatbot::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmerFooter 3s infinite;
+}
+
+@keyframes shimmerFooter {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.footer-whatsapp-chatbot:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+  background: linear-gradient(135deg, #2EE375 0%, #15A589 100%);
+}
+
+.whatsapp-chatbot-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.whatsapp-chatbot-icon {
+  width: 36px;
+  height: 36px;
+  color: white;
+  flex-shrink: 0;
+  animation: bounceFooter 2s ease-in-out infinite;
+}
+
+@keyframes bounceFooter {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.whatsapp-chatbot-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  color: white;
+  position: relative;
+}
+
+.whatsapp-chatbot-text strong {
+  font-size: 1rem;
+  font-weight: 700;
+  display: block;
+}
+
+.whatsapp-chatbot-text span {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.whatsapp-chatbot-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff4444;
+  color: white;
+  font-size: 0.65rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  animation: pulseBadge 1.5s ease-in-out infinite;
+  box-shadow: 0 2px 8px rgba(255, 68, 68, 0.5);
+}
+
+@keyframes pulseBadge {
+  0% {
+    transform: scale(0.95);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(0.95);
+  }
+}
+
 /* Contacto */
 .contact-info {
   display: flex;
@@ -294,6 +416,23 @@
 
   .footer {
     padding: 2rem 1rem 1rem;
+  }
+
+  .footer-whatsapp-chatbot {
+    padding: 0.875rem;
+  }
+
+  .whatsapp-chatbot-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .whatsapp-chatbot-text strong {
+    font-size: 0.9rem;
+  }
+
+  .whatsapp-chatbot-text span {
+    font-size: 0.8rem;
   }
 
   .footer-section {

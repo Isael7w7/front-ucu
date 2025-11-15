@@ -1,0 +1,217 @@
+/* Overlay del modal */
+.login-comercio-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal */
+.login-comercio-modal {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 480px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 40px 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Botón de cerrar */
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Header del modal */
+.modal-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.modal-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #8B2E47;
+  margin: 0 0 8px 0;
+}
+
+.modal-header p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+/* Formulario */
+.comercio-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.comercio-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.comercio-form label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.comercio-form input {
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.comercio-form input:focus {
+  outline: none;
+  border-color: #8B2E47;
+  box-shadow: 0 0 0 3px rgba(139, 46, 71, 0.1);
+}
+
+.comercio-form input::placeholder {
+  color: #999;
+}
+
+/* Mensaje de error */
+.error-message {
+  background-color: #fee;
+  color: #c33;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 0;
+  border-left: 4px solid #c33;
+}
+
+/* Botón de submit */
+.submit-btn-comercio {
+  background: linear-gradient(135deg, #8B2E47 0%, #6B1E37 100%);
+  color: #fff;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.submit-btn-comercio:hover:not(:disabled) {
+  background: linear-gradient(135deg, #6B1E37 0%, #8B2E47 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 46, 71, 0.3);
+}
+
+.submit-btn-comercio:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Toggle entre login y registro */
+.toggle-mode {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.toggle-mode p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.toggle-mode button {
+  background: none;
+  border: none;
+  color: #8B2E47;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.toggle-mode button:hover {
+  color: #6B1E37;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .login-comercio-modal {
+    padding: 32px 24px;
+    max-height: 95vh;
+  }
+
+  .modal-header h2 {
+    font-size: 24px;
+  }
+
+  .comercio-form input {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .submit-btn-comercio {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+}

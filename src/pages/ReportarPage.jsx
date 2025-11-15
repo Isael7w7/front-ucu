@@ -337,13 +337,6 @@ const ReportarPage = () => {
                   )}
                 </div>
               </div>
-              <div className="form-group">
-                <label>Coordenadas (Latitud, Longitud)</label>
-                <div className="coordenadas-display">
-                  <p><strong>Latitud:</strong> {formData.latitud.toFixed(6)}</p>
-                  <p><strong>Longitud:</strong> {formData.longitud.toFixed(6)}</p>
-                </div>
-              </div>
 
               <button type="submit" className="submit-btn">Enviar Reporte</button>
             </form>
