@@ -6,6 +6,7 @@ import EventosPage from './pages/EventosPage';
 import ComerciosPage from './pages/ComerciosPage';
 import ReportarPage from './pages/ReportarPage';
 import LoginPage from './components/Login.jsx'; // 👈 RUTA CORREGIDA: ahora busca en 'components'
+import Dashboard from './pages/Dashboard';
 import './App.css';
 
 // -------------------------------------------------------------------------
@@ -91,6 +92,9 @@ function App() {
 
           {/* RUTA DE LOGIN: Componente Login.jsx */}
           <Route path="/login" element={<LoginPage />} />
+
+          {/* RUTA DASHBOARD: Página mostrada tras login */}
+          <Route path="/dashboard" element={<Dashboard />} />
 
           {/* Opcional: Ruta para manejar URLs desconocidas */}
           <Route path="*" element={<h1>404 | Página no encontrada</h1>} />

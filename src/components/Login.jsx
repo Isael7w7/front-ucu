@@ -15,20 +15,31 @@ const Login = ({ onSubmit } = {}) => {
     setLoading(true);
     setError(null);
     const credentials = { usuario, password };
-
     try {
+      // Si se pasó un callback externo, lo respetamos (por ejemplo para llamar a una API)
       if (onSubmit) {
-        // Si se pasa un callback (para API), lo ejecuta
         await onSubmit(credentials);
       } else {
-        // Comportamiento por defecto (simulado)
-        await new Promise((res, rej) => setTimeout(Math.random() > 0.1 ? res : rej, 800)); // 10% de fallo simulado
-        console.log('✅ Inicio de sesión simulado exitoso.', credentials);
+        // Comprobación local temporal: usuario 'admin' y contraseña '123'
+        if (!(usuario === 'admin' && password === '123')) {
+          throw new Error('Credenciales inválidas');
+        }
       }
-      navigate('/'); // Redirigir al home al tener éxito
+
+      // Redirigir al dashboard: SPA first, luego fallback forzado
+      try {
+        navigate('/dashboard');
+      } catch (e) {
+        window.location.href = '/dashboard';
+      }
+
+      setTimeout(() => {
+        if (window.location.pathname !== '/dashboard') {
+          window.location.href = '/dashboard';
+        }
+      }, 200);
     } catch (err) {
-      console.error('❌ Error de login:', err?.message || err);
-      setError('Usuario o contraseña incorrectos. Intenta de nuevo.');
+      setError('Usuario o contraseña incorrectos. Usa admin / 123 temporalmente.');
     } finally {
       setLoading(false);
     }
