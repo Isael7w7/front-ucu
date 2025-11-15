@@ -24,14 +24,10 @@ const LandingPage = () => {
         <h2>Nuestra Ubicación en Yucatán</h2>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <MapComponent
-            // Usa las nuevas coordenadas y zoom
             center={ucuLocation}
             zoom={ucuZoom}
             markerPosition={ucuLocation}
-            minZoom = {15}
-            popupText="Estamos en UCU, Yucatán"
-            maxBounds={ucuBounds}
-            maxBoundsViscosity={1.0}
+            popupText="¡Estamos en UCU!"
           />
         </div>
       </section>

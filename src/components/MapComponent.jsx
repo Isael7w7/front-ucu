@@ -17,29 +17,21 @@ L.Icon.Default.mergeOptions({
 });
 
 // Componente para manejar eventos del mapa
-const MapEvents = ({ onMapClick, onDoubleClick }) => {
+// Solo escucha click: al hacer click colocamos el marcador y llamamos callbacks
+const MapEvents = ({ onMapClick, onCoordinatesSaved }) => {
   const map = useMapEvents({
     click: (e) => {
-      if (onMapClick) {
-        onMapClick(e.latlng.lat, e.latlng.lng);
-      }
-    },
-    dblclick: (e) => {
-      // Prevenir zoom en doble click
-      e.originalEvent.preventDefault();
-      L.DomEvent.stop(e.originalEvent);
-      
-      // Llamar callback con las coordenadas del doble click
-      if (onDoubleClick) {
-        onDoubleClick(e.latlng.lat, e.latlng.lng);
-      }
+      const { lat, lng } = e.latlng;
+      if (onMapClick) onMapClick(lat, lng);
+      if (onCoordinatesSaved) onCoordinatesSaved(lat, lng);
     }
   });
   return null;
 };
 
 const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick, onCoordinatesSaved }) => {
-  const [draggedMarkerPos, setDraggedMarkerPos] = useState(markerPosition);
+  // Estado para la posición del marcador (colocado por click)
+  const [markerPos, setMarkerPos] = useState(markerPosition || center);
   
   // Valor por defecto para el centro del mapa si no se provee
   const defaultCenter = [21.031940305999093, -89.74636956802323]; // Ucú, Yucatán
@@ -50,30 +42,12 @@ const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick, onC
     [21.0450, -89.7300]  // Noreste
   ];
 
-  // Handler cuando termina el arrastre del marcador
-  const handleMarkerDragEnd = (e) => {
-    const newPos = [e.target.getLatLng().lat, e.target.getLatLng().lng];
-    setDraggedMarkerPos(newPos);
-    console.log(`📍 Marcador movido a: Latitud: ${newPos[0].toFixed(6)}, Longitud: ${newPos[1].toFixed(6)}`);
-    console.log(`💾 Coordenadas guardadas: [${newPos[0].toFixed(6)}, ${newPos[1].toFixed(6)}]`);
-    
-    // Guardar coordenadas cuando termina el arrastre
-    if (onCoordinatesSaved) {
-      onCoordinatesSaved(newPos[0], newPos[1]);
-    }
-  };
-
-  // Handler para doble click - mueve el marcador y guarda las coordenadas
-  const handleDoubleClick = (lat, lng) => {
+  // Al hacer click, colocamos el marcador y guardamos coordenadas
+  const handleMapClickInternal = (lat, lng) => {
     const newPos = [lat, lng];
-    setDraggedMarkerPos(newPos);
-    console.log(`Marcador colocado en: Latitud: ${lat.toFixed(6)}, Longitud: ${lng.toFixed(6)}`);
-    console.log(`Coordenadas guardadas: [${lat.toFixed(6)}, ${lng.toFixed(6)}]`);
-    
-    // Llamar el callback para guardar coordenadas en el padre
-    if (onCoordinatesSaved) {
-      onCoordinatesSaved(lat, lng);
-    }
+    setMarkerPos(newPos);
+    console.log(`📍 Marcador colocado en: Latitud: ${lat.toFixed(6)}, Longitud: ${lng.toFixed(6)}`);
+    if (onCoordinatesSaved) onCoordinatesSaved(lat, lng);
   };
 
   return (
@@ -85,7 +59,13 @@ const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick, onC
       minZoom={15}
       scrollWheelZoom={true}
       doubleClickZoom={false}
-      style={{ height: '500px', width: '100%', borderRadius: '8px' }}
+      style={{
+        height: '500px',
+        width: '100%',
+        borderRadius: '8px',
+        // Cambia el cursor por la imagen del marker cuando el mouse esté sobre el mapa
+        cursor: `url('https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png') 12 41, auto`
+      }}
       maxBounds={ucuBounds}
       maxBoundsViscosity={1.0}
     >
@@ -95,18 +75,12 @@ const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick, onC
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {/* Componente para capturar eventos del mapa */}
-      <MapEvents onMapClick={onMapClick} onDoubleClick={handleDoubleClick} />
+      {/* Componente para capturar eventos del mapa: click coloca marcador y guarda coordenadas */}
+      <MapEvents onMapClick={onMapClick} onCoordinatesSaved={handleMapClickInternal} />
 
-      {/* Marcador con draggable */}
-      {draggedMarkerPos && (
-        <Marker 
-          position={draggedMarkerPos}
-          draggable={true}
-          eventHandlers={{
-            dragend: handleMarkerDragEnd
-          }}
-        >
+      {/* Marcador fijo en la posición seleccionada (no draggable) */}
+      {markerPos && (
+        <Marker position={markerPos}>
           {popupText && <Popup>{popupText}</Popup>}
         </Marker>
       )}
