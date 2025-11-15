@@ -31,6 +31,7 @@ const ReportarPage = () => {
     { type: 'bot', text: 'Hola! Soy tu asistente. ¿En qué puedo ayudarte?' }
   ]);
   const [chatInput, setChatInput] = useState('');
+  const [searchingAddress, setSearchingAddress] = useState(false);
 
   // Manejador general de cambios en inputs
   const handleChange = (e) => {
@@ -89,6 +90,83 @@ const ReportarPage = () => {
       longitud: lng
     }));
       console.log(`Coordenadas actualizadas en el formulario: [${lat.toFixed(6)}, ${lng.toFixed(6)}]`);
+  };
+
+  // Función para buscar dirección y geocodificar
+  const handleAddressSearch = async () => {
+    if (!formData.direccion.trim()) {
+      toast.error('Por favor ingresa una dirección');
+      return;
+    }
+
+    setSearchingAddress(true);
+    
+    try {
+      // Construir query con la dirección y limitar a Ucú, Yucatán
+      const query = `${formData.direccion}, Ucú, Yucatán, México`;
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5&countrycodes=mx`
+      );
+      
+      const data = await response.json();
+      
+      if (data && data.length > 0) {
+        // Buscar resultado dentro de los límites de Ucú
+        const ucuBounds = {
+          minLat: 21.0250,
+          maxLat: 21.0400,
+          minLng: -89.7550,
+          maxLng: -89.7350
+        };
+        
+        const resultInUcu = data.find(result => {
+          const lat = parseFloat(result.lat);
+          const lng = parseFloat(result.lon);
+          return lat >= ucuBounds.minLat && lat <= ucuBounds.maxLat &&
+                 lng >= ucuBounds.minLng && lng <= ucuBounds.maxLng;
+        });
+        
+        if (resultInUcu) {
+          const lat = parseFloat(resultInUcu.lat);
+          const lng = parseFloat(resultInUcu.lon);
+          
+          setFormData(prev => ({
+            ...prev,
+            latitud: lat,
+            longitud: lng
+          }));
+          
+          toast.success('¡Dirección encontrada en Ucú!');
+        } else {
+          // Si no hay resultados en Ucú, usar el primer resultado
+          const lat = parseFloat(data[0].lat);
+          const lng = parseFloat(data[0].lon);
+          
+          setFormData(prev => ({
+            ...prev,
+            latitud: lat,
+            longitud: lng
+          }));
+          
+          toast.warning('Dirección encontrada. Verifica la ubicación en el mapa.');
+        }
+      } else {
+        toast.error('No se encontró la dirección. Intenta con más detalles o selecciona en el mapa.');
+      }
+    } catch (error) {
+      console.error('Error al buscar dirección:', error);
+      toast.error('Error al buscar la dirección. Intenta nuevamente.');
+    } finally {
+      setSearchingAddress(false);
+    }
+  };
+
+  // Manejar Enter en el campo de dirección
+  const handleAddressKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleAddressSearch();
+    }
   };
 
   // 💡 FUNCIÓN PRINCIPAL DE ENVÍO DE DATOS A LA API (POST) CON TOASTIFY
@@ -220,15 +298,58 @@ const ReportarPage = () => {
               {/* CAMPO DIRECCIÓN */}
               <div className="form-group">
                 <label htmlFor="direccion">Dirección (Referencia)</label>
-                <input
-                  type="text"
-                  id="direccion"
-                  name="direccion"
-                  value={formData.direccion}
-                  onChange={handleChange}
-                  placeholder="Calle, número, colonia, referencia"
-                  required
-                />
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <input
+                    type="text"
+                    id="direccion"
+                    name="direccion"
+                    value={formData.direccion}
+                    onChange={handleChange}
+                    onKeyPress={handleAddressKeyPress}
+                    placeholder="Calle, número, colonia, referencia"
+                    required
+                    style={{ flex: 1 }}
+                  />
+                  <button
+                    type="button"
+                    onClick={handleAddressSearch}
+                    disabled={searchingAddress}
+                    style={{
+                      padding: '10px 16px',
+                      backgroundColor: '#8B0000',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '8px',
+                      cursor: searchingAddress ? 'not-allowed' : 'pointer',
+                      fontSize: '16px',
+                      fontWeight: '500',
+                      transition: 'all 0.3s ease',
+                      opacity: searchingAddress ? 0.6 : 1,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px'
+                    }}
+                    title="Buscar dirección en el mapa"
+                  >
+                    {searchingAddress ? (
+                      <>
+                        <svg style={{ animation: 'spin 1s linear infinite', width: '18px', height: '18px' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                          <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                        Buscando...
+                      </>
+                    ) : (
+                      <>
+                        <svg style={{ width: '18px', height: '18px' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <circle cx="11" cy="11" r="8"/>
+                          <path d="M21 21l-4.35-4.35"/>
+                        </svg>
+                        Buscar
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
 
               {/* CAMPO TIPO DE REPORTE - BOTONES CON ICONOS */}

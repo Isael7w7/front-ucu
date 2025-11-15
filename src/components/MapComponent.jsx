@@ -29,9 +29,32 @@ const MapEvents = ({ onMapClick, onCoordinatesSaved }) => {
   return null;
 };
 
+// Componente para actualizar el centro del mapa cuando cambian las coordenadas
+const MapCenterUpdater = ({ center }) => {
+  const map = useMapEvents({});
+  
+  useEffect(() => {
+    if (center) {
+      map.flyTo(center, map.getZoom(), {
+        duration: 1.5,
+        easeLinearity: 0.5
+      });
+    }
+  }, [center, map]);
+  
+  return null;
+};
+
 const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick, onCoordinatesSaved }) => {
   // Estado para la posición del marcador (colocado por click)
   const [markerPos, setMarkerPos] = useState(markerPosition || center);
+  
+  // Actualizar markerPos cuando center cambie (para geocodificación)
+  useEffect(() => {
+    if (center && (center[0] !== markerPos[0] || center[1] !== markerPos[1])) {
+      setMarkerPos(center);
+    }
+  }, [center]);
   
   // Valor por defecto para el centro del mapa si no se provee
   const defaultCenter = [21.031940305999093, -89.74636956802323]; // Ucú, Yucatán
@@ -100,6 +123,9 @@ const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick, onC
 
       {/* Componente para capturar eventos del mapa: click coloca marcador y guarda coordenadas */}
       <MapEvents onMapClick={onMapClick} onCoordinatesSaved={handleMapClickInternal} />
+      
+      {/* Componente para actualizar el centro cuando cambian las coordenadas */}
+      <MapCenterUpdater center={center} />
 
       {/* Marcador fijo en la posición seleccionada (no draggable) */}
       {markerPos && (

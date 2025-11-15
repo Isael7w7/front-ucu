@@ -47,7 +47,7 @@
 }
 
 .logo-image {
-  height: 50px;
+  height: 70px;
   width: auto;
   object-fit: contain;
   animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s both;

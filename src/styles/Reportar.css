@@ -857,3 +857,13 @@
     padding: 0.6rem;
   }
 }
+
+/* Animación para el botón de búsqueda de dirección */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
