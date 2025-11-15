@@ -38,7 +38,7 @@ const MapEvents = ({ onMapClick, onDoubleClick }) => {
   return null;
 };
 
-const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick }) => {
+const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick, onCoordinatesSaved }) => {
   const [draggedMarkerPos, setDraggedMarkerPos] = useState(markerPosition);
   
   // Valor por defecto para el centro del mapa si no se provee
@@ -55,15 +55,25 @@ const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick }) =
     const newPos = [e.target.getLatLng().lat, e.target.getLatLng().lng];
     setDraggedMarkerPos(newPos);
     console.log(`📍 Marcador movido a: Latitud: ${newPos[0].toFixed(6)}, Longitud: ${newPos[1].toFixed(6)}`);
-    console.log(`Coordenadas: [${newPos[0].toFixed(6)}, ${newPos[1].toFixed(6)}]`);
+    console.log(`💾 Coordenadas guardadas: [${newPos[0].toFixed(6)}, ${newPos[1].toFixed(6)}]`);
+    
+    // Guardar coordenadas cuando termina el arrastre
+    if (onCoordinatesSaved) {
+      onCoordinatesSaved(newPos[0], newPos[1]);
+    }
   };
 
-  // Handler para doble click - mueve el marcador sin zoom
+  // Handler para doble click - mueve el marcador y guarda las coordenadas
   const handleDoubleClick = (lat, lng) => {
     const newPos = [lat, lng];
     setDraggedMarkerPos(newPos);
-    console.log(`📍 Marcador colocado en doble click: Latitud: ${lat.toFixed(6)}, Longitud: ${lng.toFixed(6)}`);
-    console.log(`Coordenadas: [${lat.toFixed(6)}, ${lng.toFixed(6)}]`);
+    console.log(`📍 Marcador colocado en: Latitud: ${lat.toFixed(6)}, Longitud: ${lng.toFixed(6)}`);
+    console.log(`💾 Coordenadas guardadas: [${lat.toFixed(6)}, ${lng.toFixed(6)}]`);
+    
+    // Llamar el callback para guardar coordenadas en el padre
+    if (onCoordinatesSaved) {
+      onCoordinatesSaved(lat, lng);
+    }
   };
 
   return (

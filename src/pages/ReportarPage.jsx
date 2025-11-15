@@ -31,6 +31,16 @@ const ReportarPage = () => {
     }));
   };
 
+  const handleCoordinatesSaved = (lat, lng) => {
+    // Actualizar las coordenadas cuando se guardan (doble click)
+    setFormData(prev => ({
+      ...prev,
+      latitud: lat,
+      longitud: lng
+    }));
+    console.log(`✅ Coordenadas actualizadas en el formulario: [${lat.toFixed(6)}, ${lng.toFixed(6)}]`);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const reporteData = {
@@ -142,6 +152,7 @@ const ReportarPage = () => {
               markerPosition={[formData.latitud, formData.longitud]}
               popupText="Ubicación del reporte"
               onMapClick={handleMapClick}
+              onCoordinatesSaved={handleCoordinatesSaved}
             />
             <p className="map-info">Haz clic en el mapa para actualizar la ubicación</p>
           </div>
