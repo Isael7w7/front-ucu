@@ -4,6 +4,21 @@ Bienvenido al repositorio del frontend de **XuxCú** — una plataforma integral
 
 ---
 
+## 🚀 Enlaces de Despliegue
+
+Una vez que el proyecto esté desplegado en producción, aquí irán los links de acceso:
+
+### Frontend
+- **URL del despliegue:**: https://front-emkrgwiul-luischitos-projects.vercel.app/
+
+### Backend
+- **URL del repositorio del backend**: https://github.com/LuisChito/ucuDigital
+
+### Base de Datos
+- **Proveedor:** [SQLSERVER]
+
+---
+
 ## 📋 Tabla de Contenidos
 
 1. [Descripción General](#descripción-general)
@@ -436,21 +451,6 @@ cd ucuDigital
 ```
 
 **Nota:** Asegúrate de tener el backend ejecutándose antes de probar funcionalidades que requieran API calls.
-
----
-
-## 🚀 Enlaces de Despliegue
-
-Una vez que el proyecto esté desplegado en producción, aquí irán los links de acceso:
-
-### Frontend
-- **URL del despliegue:**: https://front-emkrgwiul-luischitos-projects.vercel.app/
-
-### Backend
-- **URL del repositorio del backend**: https://github.com/LuisChito/ucuDigital
-
-### Base de Datos
-- **Proveedor:** [SQLSERVER]
 
 ---
 
