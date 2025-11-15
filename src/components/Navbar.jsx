@@ -7,7 +7,7 @@ const Navbar = ({
   onComercios,
   onLogin = () => { }, // agregado: callback para inicio de sesión
   logoText = 'XuxCú',
-  logoYear = 'Cuidadana, Eventos y Comercio',
+  logoYear = 'Ciudadania, Eventos y Comercio',
   logoSrc = '/Logo XuxCu.svg',
   onHome = () => { } // callback para ir a home
 }) => {
