@@ -1,0 +1,142 @@
+.comercios-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 3rem 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.comercios-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.comercios-page h1 {
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.comercios-page .subtitle {
+  color: #666;
+  margin-bottom: 3rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.comercios-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.comercio-pill {
+  background: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 2px solid #e0e0e0;
+}
+
+.comercio-pill:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: #8B2E47;
+}
+
+.comercio-pill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.comercio-pill-header h3 {
+  color: #333;
+  margin: 0;
+  flex: 1;
+  font-size: 1rem;
+}
+
+.rating {
+  font-weight: 600;
+  color: #FFA500;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+.comercio-categoria {
+  display: inline-block;
+  color: #8B2E47;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+  padding: 0.3rem 0.8rem;
+  background-color: #f0e8f0;
+  border-radius: 15px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.comercio-pill-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.comercio-pill-info p {
+  margin: 0;
+  color: #555;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.comercio-pill-descripcion {
+  color: #666;
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+
+.comercio-pill-btn {
+  padding: 0.6rem;
+  background: #8B2E47;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.comercio-pill-btn:hover {
+  background: #a83a57;
+  transform: scale(1.05);
+}
+
+@media (max-width: 1024px) {
+  .comercios-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .comercios-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comercios-page h1 {
+    font-size: 1.5rem;
+  }
+}
+

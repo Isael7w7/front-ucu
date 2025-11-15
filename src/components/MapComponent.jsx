@@ -22,14 +22,22 @@ const MapComponent = ({ center, zoom, markerPosition, popupText }) => {
   const defaultCenter = [21.031940305999093, -89.74636956802323]; // Londres
   const defaultZoom = 13;
 
+  const ucuBounds = [
+    [21.0200, -89.7600], // Suroeste
+    [21.0450, -89.7300]  // Noreste
+  ];
+
   return (
     // MapContainer es el contenedor principal del mapa de react-leaflet
     // style={{ height: '500px', width: '100%' }} es crucial para que el mapa sea visible
     <MapContainer
       center={center || defaultCenter}
       zoom={zoom || defaultZoom}
+      minZoom = {15}
       scrollWheelZoom={true} // Deshabilita el zoom con la rueda del ratón
       style={{ height: '500px', width: '100%', borderRadius: '8px' }}
+      maxBounds={ucuBounds}
+      maxBoundsViscosity={1.0}
     >
       {/* TileLayer define el proveedor de los "tiles" del mapa (las imágenes de fondo) */}
       <TileLayer

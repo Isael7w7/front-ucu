@@ -10,6 +10,11 @@ const LandingPage = () => {
   // Un zoom de 9 muestra casi todo el estado. Un zoom de 12 centra bien la ciudad.
   const ucuZoom = 15;
 
+  const ucuBounds = [
+    [21.0200, -89.7600], // Suroeste
+    [21.0450, -89.7300]  // Noreste
+  ];
+
   return (
     <div style={{ padding: '20px', textAlign: 'center' }}>
       <h1>Bienvenido a la Landing Page de UCU Frontend</h1>
@@ -23,7 +28,10 @@ const LandingPage = () => {
             center={ucuLocation}
             zoom={ucuZoom}
             markerPosition={ucuLocation}
-            popupText="¡Estamos en Yucatán!"
+            minZoom = {15}
+            popupText="Estamos en UCU, Yucatán"
+            maxBounds={ucuBounds}
+            maxBoundsViscosity={1.0}
           />
         </div>
       </section>

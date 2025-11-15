@@ -1,0 +1,200 @@
+.carousel {
+  position: relative;
+  width: 100%;
+  padding: 2rem 1rem;
+}
+
+.carousel-content {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 0 2rem;
+}
+
+.carousel-item {
+  width: 100%;
+}
+
+.evento-card-carousel {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.evento-card-carousel:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.evento-card-carousel .evento-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.evento-card-carousel .evento-header h3 {
+  color: #333;
+  margin: 0;
+  flex: 1;
+  font-size: 1.1rem;
+}
+
+.evento-card-carousel .categoria-badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.evento-card-carousel .categoria-badge.limpieza {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.evento-card-carousel .categoria-badge.reunion {
+  background-color: #e3f2fd;
+  color: #1565c0;
+}
+
+.evento-card-carousel .categoria-badge.taller {
+  background-color: #fce4ec;
+  color: #c2185b;
+}
+
+.evento-card-carousel .evento-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1rem 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.evento-card-carousel .info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.evento-card-carousel .info-item .icon {
+  font-size: 1.2rem;
+}
+
+.evento-card-carousel .evento-descripcion {
+  color: #555;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.evento-card-carousel .evento-btn {
+  padding: 0.8rem;
+  background: #8B2E47;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.evento-card-carousel .evento-btn:hover {
+  background: #a83a57;
+  transform: scale(1.02);
+}
+
+/* Botones del carrusel */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(139, 46, 71, 0.8);
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  z-index: 20;
+}
+
+.carousel-btn:hover {
+  background: rgba(139, 46, 71, 1);
+}
+
+.carousel-btn.prev {
+  left: 0;
+}
+
+.carousel-btn.next {
+  right: 0;
+}
+
+/* Dots */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ccc;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: #8B2E47;
+  width: 30px;
+  border-radius: 6px;
+}
+
+@media (max-width: 1024px) {
+  .carousel-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .carousel-btn {
+    padding: 0.8rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .carousel-btn {
+    padding: 0.6rem;
+    font-size: 1rem;
+  }
+}
+

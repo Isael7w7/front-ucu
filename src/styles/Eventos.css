@@ -1,0 +1,33 @@
+.eventos-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 3rem 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.eventos-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.eventos-page h1 {
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.eventos-page .subtitle {
+  color: #666;
+  margin-bottom: 3rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .eventos-page h1 {
+    font-size: 1.5rem;
+  }
+}
