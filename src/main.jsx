@@ -1,10 +1,19 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
+// Importa las funciones necesarias de react-dom/client para renderizar
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+// Importa el componente principal App que acabamos de crear
+import App from './App.jsx';
+// Importa estilos globales (archivo de estilos en src/styles)
+// import './styles/main.css'; 
+
+// Encuentra el elemento DOM donde se montará la aplicación (generalmente el div con id="root")
+const rootElement = document.getElementById('root');
+
+// Usa createRoot para crear un root de React y renderizar la aplicación
+ReactDOM.createRoot(rootElement).render(
+  // <React.StrictMode> ayuda a encontrar problemas potenciales en la aplicación
+  <React.StrictMode>
     <App />
-  </StrictMode>,
-)
+  </React.StrictMode>,
+);
