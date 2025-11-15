@@ -27,6 +27,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1.5rem;
+  flex-wrap: nowrap;
 }
 
 /* Logo y Nombre (Izquierda) */
@@ -36,7 +38,8 @@
   gap: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  flex: 1;
+  flex: 0 0 auto;
+  min-width: fit-content;
 }
 
 .navbar-logo:hover {
@@ -44,7 +47,7 @@
 }
 
 .logo-image {
-  height: 100px;
+  height: 50px;
   width: auto;
   object-fit: contain;
   animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s both;
@@ -74,7 +77,7 @@
 }
 
 .logo-text {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #F5DEB3;
   letter-spacing: 0.5px;
@@ -86,7 +89,7 @@
 }
 
 .logo-year {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   color: #D4A574;
   font-weight: 500;
   letter-spacing: 0.5px;
@@ -145,9 +148,10 @@
 /* Menu Central */
 .navbar-menu {
   display: flex;
-  gap: 2rem;
-  flex: 2;
+  gap: 1.5rem;
+  flex: 1;
   justify-content: center;
+  margin: 0;
 }
 
 .nav-link {
@@ -201,10 +205,11 @@
 
 /* Acciones (Derecha) */
 .navbar-actions {
-  flex: 1;
+  flex: 0 0 auto;
   display: flex;
   justify-content: flex-end;
-  gap: 1.5rem;
+  align-items: center;
+  gap: 1rem;
 }
 
 .social-link {
