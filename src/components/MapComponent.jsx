@@ -1,5 +1,5 @@
 // src/components/MapComponent.jsx
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 // Importa el ícono predeterminado de Leaflet para que los marcadores se muestren correctamente
 import 'leaflet/dist/images/marker-icon-2x.png';
@@ -17,11 +17,21 @@ L.Icon.Default.mergeOptions({
 });
 
 // Componente para manejar eventos del mapa
-const MapEvents = ({ onMapClick }) => {
+const MapEvents = ({ onMapClick, onDoubleClick }) => {
   const map = useMapEvents({
     click: (e) => {
       if (onMapClick) {
         onMapClick(e.latlng.lat, e.latlng.lng);
+      }
+    },
+    dblclick: (e) => {
+      // Prevenir zoom en doble click
+      e.originalEvent.preventDefault();
+      L.DomEvent.stop(e.originalEvent);
+      
+      // Llamar callback con las coordenadas del doble click
+      if (onDoubleClick) {
+        onDoubleClick(e.latlng.lat, e.latlng.lng);
       }
     }
   });
@@ -29,6 +39,8 @@ const MapEvents = ({ onMapClick }) => {
 };
 
 const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick }) => {
+  const [draggedMarkerPos, setDraggedMarkerPos] = useState(markerPosition);
+  
   // Valor por defecto para el centro del mapa si no se provee
   const defaultCenter = [21.031940305999093, -89.74636956802323]; // Ucú, Yucatán
   const defaultZoom = 13;
@@ -38,14 +50,31 @@ const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick }) =
     [21.0450, -89.7300]  // Noreste
   ];
 
+  // Handler cuando termina el arrastre del marcador
+  const handleMarkerDragEnd = (e) => {
+    const newPos = [e.target.getLatLng().lat, e.target.getLatLng().lng];
+    setDraggedMarkerPos(newPos);
+    console.log(`📍 Marcador movido a: Latitud: ${newPos[0].toFixed(6)}, Longitud: ${newPos[1].toFixed(6)}`);
+    console.log(`Coordenadas: [${newPos[0].toFixed(6)}, ${newPos[1].toFixed(6)}]`);
+  };
+
+  // Handler para doble click - mueve el marcador sin zoom
+  const handleDoubleClick = (lat, lng) => {
+    const newPos = [lat, lng];
+    setDraggedMarkerPos(newPos);
+    console.log(`📍 Marcador colocado en doble click: Latitud: ${lat.toFixed(6)}, Longitud: ${lng.toFixed(6)}`);
+    console.log(`Coordenadas: [${lat.toFixed(6)}, ${lng.toFixed(6)}]`);
+  };
+
   return (
     // MapContainer es el contenedor principal del mapa de react-leaflet
     // style={{ height: '500px', width: '100%' }} es crucial para que el mapa sea visible
     <MapContainer
       center={center || defaultCenter}
       zoom={zoom || defaultZoom}
-      minZoom = {15}
-      scrollWheelZoom={true} // Deshabilita el zoom con la rueda del ratón
+      minZoom={15}
+      scrollWheelZoom={true}
+      doubleClickZoom={false}
       style={{ height: '500px', width: '100%', borderRadius: '8px' }}
       maxBounds={ucuBounds}
       maxBoundsViscosity={1.0}
@@ -57,12 +86,17 @@ const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick }) =
       />
 
       {/* Componente para capturar eventos del mapa */}
-      <MapEvents onMapClick={onMapClick} />
+      <MapEvents onMapClick={onMapClick} onDoubleClick={handleDoubleClick} />
 
-      {/* Si se proporciona una posición de marcador, se añade un Marker al mapa */}
-      {markerPosition && (
-        <Marker position={markerPosition}>
-          {/* Popup es un elemento emergente que aparece al hacer clic en el marcador */}
+      {/* Marcador con draggable */}
+      {draggedMarkerPos && (
+        <Marker 
+          position={draggedMarkerPos}
+          draggable={true}
+          eventHandlers={{
+            dragend: handleMarkerDragEnd
+          }}
+        >
           {popupText && <Popup>{popupText}</Popup>}
         </Marker>
       )}
