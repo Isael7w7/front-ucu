@@ -67,8 +67,8 @@ const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick, onC
   const handleDoubleClick = (lat, lng) => {
     const newPos = [lat, lng];
     setDraggedMarkerPos(newPos);
-    console.log(`📍 Marcador colocado en: Latitud: ${lat.toFixed(6)}, Longitud: ${lng.toFixed(6)}`);
-    console.log(`💾 Coordenadas guardadas: [${lat.toFixed(6)}, ${lng.toFixed(6)}]`);
+    console.log(`Marcador colocado en: Latitud: ${lat.toFixed(6)}, Longitud: ${lng.toFixed(6)}`);
+    console.log(`Coordenadas guardadas: [${lat.toFixed(6)}, ${lng.toFixed(6)}]`);
     
     // Llamar el callback para guardar coordenadas en el padre
     if (onCoordinatesSaved) {
