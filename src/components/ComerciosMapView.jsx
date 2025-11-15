@@ -42,8 +42,7 @@ const createCustomIcon = (categoria) => {
           color: white;
           font-weight: bold;
           font-size: 12px;
-        ">📍</div>
-      </div>
+        ">
     `,
     iconSize: [24, 32],
     iconAnchor: [12, 32],
