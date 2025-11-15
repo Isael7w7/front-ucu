@@ -19,8 +19,8 @@ L.Icon.Default.mergeOptions({
 
 const MapComponent = ({ center, zoom, markerPosition, popupText }) => {
   // Valor por defecto para el centro del mapa si no se provee
-  const defaultCenter = [21.031940305999093, -89.74636956802323];
-  const defaultZoom = 30;
+  const defaultCenter = [21.031940305999093, -89.74636956802323]; // Londres
+  const defaultZoom = 13;
 
   return (
     // MapContainer es el contenedor principal del mapa de react-leaflet

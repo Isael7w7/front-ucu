@@ -5,10 +5,10 @@ import MapComponent from '../components/MapComponent';
 const LandingPage = () => {
   // Coordenadas actualizadas para centrar en Mérida, Yucatán, México.
   // Latitud: 20.967, Longitud: -89.624
-  const yucatanLocation = [20.967, -89.624];
+  const ucuLocation = [21.031940305999093, -89.74636956802323];
   // Zoom ajustado para mostrar una buena vista del estado o la ciudad central.
   // Un zoom de 9 muestra casi todo el estado. Un zoom de 12 centra bien la ciudad.
-  const yucatanZoom = 9;
+  const ucuZoom = 15;
 
   return (
     <div style={{ padding: '20px', textAlign: 'center' }}>
@@ -20,9 +20,9 @@ const LandingPage = () => {
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <MapComponent
             // Usa las nuevas coordenadas y zoom
-            center={yucatanLocation}
-            zoom={yucatanZoom}
-            markerPosition={yucatanLocation}
+            center={ucuLocation}
+            zoom={ucuZoom}
+            markerPosition={ucuLocation}
             popupText="¡Estamos en Yucatán!"
           />
         </div>
