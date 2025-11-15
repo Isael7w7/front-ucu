@@ -120,11 +120,19 @@ html, body, #root {
 .description-section h2 {
   color: #F5DEB3;
   margin: 0 0 1.5rem 0;
-  font-size: 2.2rem;
+  font-size: 3rem;
   text-align: left;
   font-weight: 700;
   animation: slideInLeft 0.8s ease-out, textGlow 2s ease-in-out 0.8s infinite;
   letter-spacing: -0.5px;
+}
+
+.welcome-title {
+  color: #F5DEB3;
+}
+
+.welcome-white {
+  color: #ffffff;
 }
 
 .description-section p {
@@ -173,7 +181,7 @@ html, body, #root {
   }
 
   .description-section h2 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
   }
 

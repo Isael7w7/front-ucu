@@ -19,7 +19,7 @@ const HomePageContent = ({ eventosRef, comerciosRef, reportarRef }) => {
       {/* Sección de Descripción General */}
       <section className="description-section">
         <div className="description-container">
-          <h2>Bienvenido a tu Comunidad Digital</h2>
+          <h2>Bienvenido a <span className="welcome-title">X<span className="welcome-white">u</span>x<span className="welcome-white">C</span><span className="welcome-white">ú</span></span></h2>
           <p>Descubre todas las oportunidades que tu comunidad tiene para ofrecerte. Desde eventos que fortalecen nuestros lazos, comercios locales que impulsan nuestra economía, hasta canales para reportar y mejorar nuestro entorno. Aquí encontrarás todo lo que necesitas para ser parte activa del desarrollo y bienestar de nuestra comunidad.</p>
         </div>
       </section>
@@ -70,12 +70,18 @@ function App() {
       navigate('/login');
     };
 
+    // Función para ir a la página principal
+    const handleHome = () => {
+      navigate('/');
+    };
+
     return (
       <MainLayout
         onReportar={() => scrollToSection(reportarRef)}
         onEventos={() => scrollToSection(eventosRef)}
         onComercios={() => scrollToSection(comerciosRef)}
         onLogin={handleLoginRedirect}
+        onHome={handleHome}
       >
         <Routes>
           {/* RUTA PRINCIPAL: Contenido de scroll */}

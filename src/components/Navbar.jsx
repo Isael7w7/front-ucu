@@ -6,9 +6,10 @@ const Navbar = ({
   onEventos,
   onComercios,
   onLogin = () => { }, // agregado: callback para inicio de sesión
-  logoText = 'XuxCu',
+  logoText = 'XuxCú',
   logoYear = 'Cuidadana, Eventos y Comercio',
-  logoSrc = '/Logo XuxCu.svg'
+  logoSrc = '/Logo XuxCu.svg',
+  onHome = () => { } // callback para ir a home
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -32,13 +33,20 @@ const Navbar = ({
     <nav className="navbar">
       <div className="navbar-container">
         {/* Logo y Nombre (Izquierda) */}
-        <div className="navbar-logo">
+        <button 
+          className="navbar-logo"
+          onClick={() => handleClick(onHome)}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+          title="Ir a la página principal"
+        >
           <img src={logoSrc} alt="Logo" className="logo-image" />
           <div className="logo-text-container">
-            <span className="logo-text">{logoText}</span>
+            <span className="logo-text">
+              X<span className="logo-white">u</span>x<span className="logo-white">C</span><span className="logo-white">ú</span>
+            </span>
             <span className="logo-year">{logoYear}</span>
           </div>
-        </div>
+        </button>
 
         {/* Hamburger Menu */}
         <button className={`hamburger ${menuOpen ? 'active' : ''}`} onClick={toggleMenu}>

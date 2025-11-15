@@ -44,7 +44,7 @@
 }
 
 .logo-image {
-  height: 80px;
+  height: 100px;
   width: auto;
   object-fit: contain;
   animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s both;
@@ -74,15 +74,19 @@
 }
 
 .logo-text {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: #F5DEB3;
   letter-spacing: 0.5px;
   line-height: 1.2;
 }
 
+.logo-white {
+  color: #ffffff;
+}
+
 .logo-year {
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   color: #D4A574;
   font-weight: 500;
   letter-spacing: 0.5px;
@@ -239,26 +243,26 @@
   }
 }
 
-/* Estilos para el botón "Inicio de sesión" - tonos cercanos a la paleta del navbar */
+/* Estilos para el botón "Inicio de sesión" - colores burgundy y wheat */
 :root {
-  --nav-primary: #0b7a75;
-  /* tono principal (verde/teal) */
-  --nav-accent: #00b894;
-  /* acento más brillante */
-  --nav-contrast: #ffffff;
-  /* texto claro sobre el botón */
+  --nav-primary: #8B2E47;
+  /* burgundy principal */
+  --nav-accent: #a83a57;
+  /* burgundy más claro */
+  --nav-contrast: #F5DEB3;
+  /* wheat para texto */
 }
 
 .login-button {
   background: linear-gradient(90deg, var(--nav-primary), var(--nav-accent));
   color: var(--nav-contrast);
-  border: none;
+  border: 2px solid var(--nav-contrast);
   padding: 8px 14px;
   border-radius: 10px;
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(7, 90, 86, 0.18);
+  box-shadow: 0 6px 18px rgba(139, 46, 71, 0.25);
   transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
   display: inline-flex;
   align-items: center;
@@ -269,17 +273,19 @@
 /* Hover / focus / active */
 .login-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(7, 90, 86, 0.22);
+  box-shadow: 0 10px 26px rgba(139, 46, 71, 0.35);
   opacity: 0.98;
+  background: #a83a57;
+  color: #ffffff;
 }
 
 .login-button:active {
   transform: translateY(0);
-  box-shadow: 0 6px 14px rgba(7, 90, 86, 0.16);
+  box-shadow: 0 6px 14px rgba(139, 46, 71, 0.2);
 }
 
 .login-button:focus {
-  outline: 3px solid rgba(0, 184, 148, 0.18);
+  outline: 3px solid rgba(139, 46, 71, 0.3);
   outline-offset: 3px;
   border-radius: 10px;
 }

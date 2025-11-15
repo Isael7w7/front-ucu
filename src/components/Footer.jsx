@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="footer-section">
             <img src="/Logo XuxCu.svg" alt="Logo UCÚ" className="footer-logo" />
             <div className="footer-info">
-              <h3 className="footer-title">XuxCu</h3>
+              <h3 className="footer-title">XuxCú</h3>
               <p className="footer-tagline">Cuidadana, Eventos y Comercio</p>
             </div>
           </div>
