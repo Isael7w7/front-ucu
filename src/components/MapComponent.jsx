@@ -50,6 +50,26 @@ const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick, onC
     if (onCoordinatesSaved) onCoordinatesSaved(lat, lng);
   };
 
+  // Crear un DivIcon SVG color "guinda" (burgundy) para el marcador
+  const guindaColor = '#7a2230';
+  const guindaSvg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+      <path d="M15 0C7 0 0 7 0 15c0 10 15 27 15 27s15-17 15-27C30 7 23 0 15 0z" fill="${guindaColor}"/>
+      <circle cx="15" cy="15" r="5" fill="#fff"/>
+    </svg>
+  `;
+
+  const guindaIcon = L.divIcon({
+    html: guindaSvg,
+    className: '',
+    iconSize: [30, 42],
+    iconAnchor: [15, 42],
+    popupAnchor: [0, -36]
+  });
+
+  // Cursor usando el mismo SVG (encodeado) para que coincida con el icono
+  const guindaCursor = `url("data:image/svg+xml;utf8,${encodeURIComponent(guindaSvg)}") 15 42, auto`;
+
   return (
     // MapContainer es el contenedor principal del mapa de react-leaflet
     // style={{ height: '500px', width: '100%' }} es crucial para que el mapa sea visible
@@ -63,8 +83,8 @@ const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick, onC
         height: '500px',
         width: '100%',
         borderRadius: '8px',
-        // Cambia el cursor por la imagen del marker cuando el mouse esté sobre el mapa
-        cursor: `url('https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png') 12 41, auto`
+        // Cursor que usa el mismo SVG guinda del marcador
+        cursor: guindaCursor
       }}
       maxBounds={ucuBounds}
       maxBoundsViscosity={1.0}
@@ -80,7 +100,7 @@ const MapComponent = ({ center, zoom, markerPosition, popupText, onMapClick, onC
 
       {/* Marcador fijo en la posición seleccionada (no draggable) */}
       {markerPos && (
-        <Marker position={markerPos}>
+        <Marker position={markerPos} icon={guindaIcon}>
           {popupText && <Popup>{popupText}</Popup>}
         </Marker>
       )}
