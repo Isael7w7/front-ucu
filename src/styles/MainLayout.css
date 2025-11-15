@@ -26,8 +26,7 @@
   width: 100%;
   box-sizing: border-box;
   /* Asegura que el padding no afecte el ancho */
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 0;
 }
 
 /* 3. Estilos básicos para asegurar que el HTML/body no interfiera */
